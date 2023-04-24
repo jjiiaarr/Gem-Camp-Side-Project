@@ -3,7 +3,12 @@ Rails.application.routes.draw do
 
   root 'home#index'
 
-  namespace :admin do
-    resources :users
+  constraints(ClientDomainConstraint.new) do
+    end
+
+  constraints(AdminDomainConstraint.new) do
+    namespace :admin do
+      resources :users
+    end
   end
 end
