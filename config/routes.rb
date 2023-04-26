@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   constraints(ClientDomainConstraint.new) do
-    devise_for :users, controllers: { sessions: 'client/sessions' }, as: 'client'
+    devise_for :users, controllers: { sessions: 'client/sessions' }
     namespace :client, path: '' do
       root 'home#index'
       resource :home
