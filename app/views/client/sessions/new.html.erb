@@ -1,26 +1,87 @@
-<h2>Client Log in</h2>
+<section class="vh-80" style="background-color: #d3d3d4;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card shadow-2-strong" style="border-radius: 1rem;">
+          <div class="card-body p-5 text-center">
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+            <h3 class="mb-5">Client Sign in</h3>
+            <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+              <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="tab-login" data-bs-toggle="pill" data-bs-target="#pills-login" role="tab"
+                        aria-controls="pills-login" aria-selected="true">Login
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-register" data-bs-toggle="pill" data-bs-target="#pills-register" role="tab"
+                        aria-controls="pills-register" aria-selected="false">Register
+                </button>
+              </li>
+            </ul>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+            <div class="tab-content">
+              <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+                <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                  <div class="form-outline mb-4">
+                    <%= f.label :email, class: "form-label" %>
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg" %>
+                  </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+                  <div class="form-outline mb-4">
+                    <%= f.label :password, class: "form-label" %>
+                    <%= f.password_field :password, autocomplete: "current-password", class: "form-control form-control-lg" %>
+                  </div>
+
+<!--                  <div class="form-check d-flex justify-content-start mb-4">-->
+                    <%#= f.check_box :remember_me, class: "form-check-input" %>
+                    <%#= f.label :remember_me, class: "form-check-label" %>
+<!--                  </div>-->
+
+                  <%= f.submit "Log in", class: "btn btn-primary btn-lg btn-block" %>
+                <% end %>
+                <%#= render "client/shared/links" %>
+              </div>
+              <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
+                <h2>Sign up</h2>
+
+                <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                  <%= render "client/shared/error_messages", resource: resource %>
+
+                  <div class="form-outline mb-4">
+                    <%= f.label :email, class: "form-label" %>
+                    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control form-control-lg" %>
+                  </div>
+
+<!--                  <div class="form-outline mb-4">-->
+                    <%#= f.label :username, class: "form-label" %>
+                    <%#= f.text_field :username, autofocus: true, autocomplete: "username", class: "form-control form-control-lg" %>
+<!--                  </div>-->
+
+                  <div class="form-outline mb-4">
+                    <%= f.label :password, class: "form-label" %>
+                    <% if @minimum_password_length %>
+                      <em>(<%= @minimum_password_length %> characters minimum)</em>
+                    <% end %><br/>
+                    <%= f.password_field :password, autocomplete: "new-password", class: "form-control form-control-lg" %>
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <%= f.label :password_confirmation, class: "form-label" %><br/>
+                    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control form-control-lg" %>
+                  </div>
+
+<!--                  <div class="form-outline mb-4">-->
+<!--                    <%#= f.label :phone_number, class: "form-label" %><br/>-->
+                    <%#= f.text_field :phone_number, autocomplete: "phone_number", class: "form-control form-control-lg" %>
+<!--                  </div>-->
+
+                  <%= f.submit "Sign Up", class: "btn btn-primary btn-lg btn-block" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-
-<%= render "client/shared/links" %>
+</section>
