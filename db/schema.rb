@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_04_28_092311) do
+ActiveRecord::Schema[7.0].define(version: 2023_04_28_150819) do
   create_table "address_barangays", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "city_id"
     t.string "code"
@@ -43,6 +43,25 @@ ActiveRecord::Schema[7.0].define(version: 2023_04_28_092311) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "user_addresses", charset: "utf8mb4", force: :cascade do |t|
+    t.integer "genre"
+    t.string "name"
+    t.string "street"
+    t.string "phone"
+    t.string "remark"
+    t.boolean "is_default"
+    t.bigint "address_region_id"
+    t.bigint "address_province_id"
+    t.bigint "address_city_id"
+    t.bigint "address_barangay_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["address_barangay_id"], name: "index_user_addresses_on_address_barangay_id"
+    t.index ["address_city_id"], name: "index_user_addresses_on_address_city_id"
+    t.index ["address_province_id"], name: "index_user_addresses_on_address_province_id"
+    t.index ["address_region_id"], name: "index_user_addresses_on_address_region_id"
   end
 
   create_table "users", charset: "utf8mb4", force: :cascade do |t|
