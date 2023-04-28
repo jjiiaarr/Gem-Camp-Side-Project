@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
 
   constraints(ClientDomainConstraint.new) do
-    devise_for :users, controllers: { sessions: 'client/sessions' }
+    devise_for :users, controllers: { sessions: 'client/sessions', registrations: 'client/registrations' }
     namespace :client, path: '' do
       root 'home#index'
       resource :home
+      resource :profile, only: [:show, :edit]
     end
   end
 

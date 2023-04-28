@@ -1,0 +1,17 @@
+<div class="container-fluid">
+  <div>
+    <%= image_tag @user.image.url if @user.image.present? %>
+    <p>Username: <%= @user.username %></p>
+    <p>Email: <%= @user.email %> </p>
+    <p>Coins: <%= @user.coins %> </p>
+    <div class="d-grid gap-2">
+      <button class="btn btn-primary" type="button">Cash In</button>
+    </div> <br />
+    <div class="d-grid gap-2 d-md-inline-block">
+      <%= link_to 'Edit Profile', edit_user_registration_path  ,class: "btn btn-primary" %>
+<!--      <button class="btn btn-primary" type="button">Edit Profile</button>-->
+      <button class="btn btn-primary" type="button">Address</button>
+      <br/>
+    </div>
+  </div>
+</div>
