@@ -49,6 +49,8 @@ gem 'devise'
 
 gem 'phonelib'
 
+gem 'carrierwave'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
