@@ -51,6 +51,8 @@ gem 'phonelib'
 
 gem 'carrierwave'
 
+gem 'rest-client'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
