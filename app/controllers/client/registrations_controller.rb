@@ -1,18 +1,29 @@
 # frozen_string_literal: true
 
 class Client::RegistrationsController < Devise::RegistrationsController
-  before_action :configure_sign_up_params, only: [:create]
-  before_action :configure_account_update_params, only: [:update]
+  before_action :configure_sign_up_params, only: :create
+  before_action :configure_account_update_params, only: :update
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    if params[:promoter].present?
+      cookies[:promoter] = params[:promoter]
+    end
+
+    super
+  end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+
+    super do |resource|
+      if cookies[:promoter].present?
+        promoter = User.find_by(email: cookies[:promoter])
+         resource.parent_id = promoter.id
+        resource.save
+      end
+    end
+  end
 
   # GET /resource/edit
   # def edit
@@ -41,9 +52,9 @@ class Client::RegistrationsController < Devise::RegistrationsController
   # protected
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
-  # end
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :password, :password_confirmation])
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
