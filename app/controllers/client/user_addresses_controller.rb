@@ -1,4 +1,5 @@
-class Client::UserAddressController < ApplicationController
+class Client::UserAddressesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_address, only: [:edit, :update, :destroy]
 
   def index
@@ -11,9 +12,10 @@ class Client::UserAddressController < ApplicationController
 
   def create
     @user_address = UserAddress.new(address_params)
+    @user_address.user = current_user
     if @user_address.save
       flash[:notice] = 'Address added successfully'
-      redirect_to client_user_address_index_path
+      redirect_to client_user_addresses_path
     else
       flash.now[:alert] = 'Address added failed'
       render :new, status: :unprocessable_entity
@@ -26,7 +28,7 @@ class Client::UserAddressController < ApplicationController
 
     if @user_address.update(address_params)
       flash[:notice] = 'Address updated successfully'
-      redirect_to client_user_address_index_path
+      redirect_to client_user_addresses_path
     else
       flash.now[:alert] = 'Address update failed'
       render :edit, status: :unprocessable_entity
