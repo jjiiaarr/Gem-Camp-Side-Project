@@ -55,6 +55,8 @@ gem 'rest-client'
 
 gem "rqrcode", "~> 2.0"
 
+gem 'active_model_serializers'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
