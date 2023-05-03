@@ -1,4 +1,4 @@
-<%= form_with model: @user_addresses do |f| %>
+<%= form_with model: user_address,  data: { controller: 'location select2' } do |f| %>
   <div class="field">
     <%= f.label :genre, class: "form-label" %>
     <%= f.radio_button :genre, 'home' %> Home
@@ -11,12 +11,41 @@
 
   <div>
     <%= f.label :street_address, class: "form-label" %>
-    <%= f.text_field :street_address, class: "form-control form-control-lg" %>
+    <%= f.text_field :street, class: "form-control form-control-lg" %>
   </div>
 
   <div>
+    <%= f.label :address_region_id %>
+    <%= f.collection_select :address_region_id,
+                            Address::Region.all, :id, :name,
+                            { prompt: 'Please select region' }, class: 'select2',
+                            data: { location_target: 'selectedRegionId', action: 'change->location#fetchProvinces' } %>
+  </div>
+  <div>
+    <%= f.label :address_provinces_id %>
+    <%= f.collection_select :address_provinces_id,
+                            [], nil, nil,
+                            { prompt: 'Please select province' }, class: 'select2',
+                            data: { location_target: 'selectedProvinceId', action: 'change->location#fetchCities' } %>
+  </div>
+
+  <div>
+    <%= f.label :address_city_id %>
+    <%= f.collection_select :address_city_id,
+                            [], nil, nil,
+                            { prompt: 'Please select city' }, class: 'select2',
+                            data: { location_target: 'selectedCityId', action: 'change->location#fetchBarangays ' } %>
+  </div>
+  <div>
+    <%= f.label :address_barangay_id %>
+    <%= f.collection_select :address_barangay_id,
+                            [], nil, nil,
+                            { prompt: 'Please select barangay' }, class: 'select2',
+                            data: { location_target: 'selectedBarangayId' } %>
+  </div>
+  <div>
     <%= f.label :phone_number, class: "form-label" %>
-    <%= f.text_field :phone_number, class: "form-control form-control-lg" %>
+    <%= f.text_field :phone, class: "form-control form-control-lg" %>
   </div>
 
   <div>
