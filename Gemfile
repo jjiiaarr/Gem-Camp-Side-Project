@@ -58,6 +58,8 @@ gem "rqrcode", "~> 2.0"
 gem 'active_model_serializers'
 
 gem 'stimulus-rails'
+
+gem 'aasm'
 # Use Sass to process CSS
 # gem "sassc-rails"
 
