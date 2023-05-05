@@ -3,7 +3,7 @@ class Client::UserAddressesController < ApplicationController
   before_action :set_address, only: [:edit, :update, :destroy]
 
   def index
-    @user_addresses = UserAddress.all
+    @user_addresses = current_user.user_address.includes(:user,:region, :province, :city, :barangay)
   end
 
   def new
@@ -38,7 +38,7 @@ class Client::UserAddressesController < ApplicationController
   def destroy
     @user_address.destroy
     flash[:notice] = 'Address deleted successfully'
-    redirect_to client_user_address_index_path
+    redirect_to client_user_addresses_path
   end
 
   private
@@ -48,6 +48,6 @@ class Client::UserAddressesController < ApplicationController
   end
 
   def address_params
-    params.require(:user_address).permit(:genre, :name, :street, :phone, :remark, :address_region, :address_province, :address_city, :address_barangay)
+    params.require(:user_address).permit(:genre, :name, :street, :phone, :remark, :address_region_id, :address_province_id, :address_city_id, :address_barangay_id)
   end
 end

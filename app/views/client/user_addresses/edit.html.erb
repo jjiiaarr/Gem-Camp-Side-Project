@@ -1,5 +1,5 @@
 <h1>Edit Address: </h1>
 
-<%= render partial: 'form', locals: {user_address: @user_address}%>
+<%= render partial: 'form', locals: {user_address: @user_address, path: client_user_address_path, method: :patch}%>
 
-<%= link_to 'Address Index', client_user_address_index_path %>
+<%= link_to 'Address Index', client_user_addresses_path %>
