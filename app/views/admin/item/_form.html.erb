@@ -1,0 +1,50 @@
+
+<%= form_with model: item, url: path, method: method do |f| %>
+
+  <% if @item.errors.any? %>
+    <ul>
+      <% @item.errors.each do |error| %>
+        <li><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div class="col-md4">
+    <%= f.label :image, class: "form-label" %>
+    <%= f.file_field :image, class: "form-control" %>
+  </div>
+  <div class="col-md-4">
+    <%= f.label :name, class: "form-label" %>
+    <%= f.text_field :name, class: "form-control form-control-lg" %>
+  </div>
+
+  <div class="col-md-4">
+    <%= f.label :quantity, class: "form-label" %>
+    <%= f.number_field :quantity, class: "form-control form-control-lg" %>
+  </div>
+
+  <div class="col-md-4">
+    <%= f.label :minimum_bets, class: "form-label" %>
+    <%= f.number_field :minimum_bets, class: "form-control" %>
+  </div>
+  <div class="col-md-4">
+    <%= f.label :online_at, class: "form-label" %>
+    <%= f.date_field :online_at, class: "form-control"%>
+  </div>
+
+  <div class="col-md-4">
+    <%= f.label :offline_at, class: "form-label" %>
+    <%= f.date_field :offline_at, class: "form-control"%>
+  </div>
+  <div class="col-md-4">
+    <%= f.label :start_at, class: "form-label" %>
+    <%= f.date_field :start_at, class: "form-control" %>
+  </div>
+  <div class="col-md-4">
+    <%= f.label :status, class: "form-label" %>
+    <%= f.radio_button :status, 'Active' %> Active
+    <%= f.radio_button :status, 'Inactive' %> Inactive <br/>
+  </div>
+
+  <%= f.submit "Submit", class: "btn btn-primary btn-block" %>
+<% end %>
