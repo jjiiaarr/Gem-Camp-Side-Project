@@ -9,14 +9,14 @@ Rails.application.routes.draw do
       resources :invites, only: :index
       resources :user_addresses
     end
-
   end
 
   constraints(AdminDomainConstraint.new) do
-    devise_for :users, controllers: { sessions: 'admin/sessions' }, as: 'admin'
     namespace :admin, path: '' do
       root 'home#index'
-      resource :home
+      resources :home
+      devise_for :users, controllers: { sessions: 'admin/sessions' }
+      resources :user_list
     end
   end
 

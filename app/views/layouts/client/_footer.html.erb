@@ -6,7 +6,7 @@
         <%= link_to 'Invite', client_invites_path, class: "btn btn-light" %>
         <button type="button" class="btn btn-light">Lottery</button>
         <button type="button" class="btn btn-light">Shop</button>
-        <%= link_to 'Me', client_profile_path, class: "btn btn-light" %>
+        <%= link_to 'Me', client_profile_path, class: "btn btn-light" if current_user %>
       </div>
     </ul>
   </div>
