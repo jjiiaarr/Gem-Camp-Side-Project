@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       devise_for :users, controllers: { sessions: 'admin/sessions' }
       resources :user_list
       resources :item
+      resources :categories, except: :show
     end
   end
 
