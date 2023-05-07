@@ -17,7 +17,14 @@ Rails.application.routes.draw do
       resources :home
       devise_for :users, controllers: { sessions: 'admin/sessions' }
       resources :user_list
-      resources :item
+      resources :item do
+        member do
+          post :start
+          post :pause
+          post :end
+          post :cancel
+        end
+      end
       resources :categories, except: :show
     end
   end

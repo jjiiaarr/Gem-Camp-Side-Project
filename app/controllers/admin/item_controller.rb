@@ -42,6 +42,48 @@ class Admin::ItemController < ApplicationController
     redirect_to admin_item_index_path
   end
 
+  def start
+    item = Item.find(params[:id])
+    item.batch_count = 0
+    if item.start!
+      item.update(quantity: item.quantity - 1, batch_count: item.batch_count + 1)
+      flash[:notice] = 'Item started'
+    else
+      flash[:alert] = 'Unable to start item'
+    end
+    redirect_to admin_item_index_path
+  end
+
+  def pause
+    item = Item.find(params[:id])
+    if item.pause!
+      flash[:notice] = 'Item paused'
+    else
+      flash[:alert] = 'Unable to pause item'
+    end
+    redirect_to admin_item_index_path
+  end
+
+  def end
+    item = Item.find(params[:id])
+    if item.end!
+      flash[:notice] = 'Item ended'
+    else
+      flash[:alert] = 'Unable to end item'
+    end
+    redirect_to admin_item_index_path
+  end
+
+  def cancel
+    item = Item.find(params[:id])
+    if item.cancel!
+      flash[:notice] = 'Item cancelled'
+    else
+      flash[:alert] = 'Unable to cancel item'
+    end
+    redirect_to admin_items_index_path
+  end
+
   private
 
   def set_item
