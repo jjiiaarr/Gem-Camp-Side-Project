@@ -39,7 +39,7 @@ class Admin::CategoriesController < ApplicationController
     else
       flash[:alert] = @category.errors.full_messages.join(', ')
     end
-    redirect_to admin_category_path
+    redirect_to admin_categories_path
   end
 
   private
