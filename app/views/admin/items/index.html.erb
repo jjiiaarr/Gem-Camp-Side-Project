@@ -1,0 +1,46 @@
+<h1>Item List</h1>
+
+<table class="table">
+  <thead>
+  <td>Image</td>
+  <td>Name</td>
+  <td>Quantity</td>
+  <td>Minimum Bets</td>
+  <td>State</td>
+  <td>Batch Count</td>
+  <td>Online at</td>
+  <td>Offline at</td>
+  <td>Start At</td>
+  <td>Status</td>
+  <td>Action</td>
+  </thead>
+  <% @items.each do |item| %>
+    <tr>
+      <td><%= image_tag item.image.url if item.image.present? %></td>
+      <td><%= item.name %></td>
+      <td><%= item.quantity %></td>
+      <td><%= item.minimum_bets %></td>
+      <td><%= item.state %></td>
+      <td><%= item.batch_count %></td>
+      <td><%= item.online_at %></td>
+      <td><%= item.offline_at %></td>
+      <td><%= item.start_at %></td>
+      <td><%= item.status %></td>
+      <td>
+        <% if item.pending? || item.paused? || item.ended? || item.cancelled? %>
+          <%= button_to 'Start', admin_item_start_path(item), method: :post, class:"btn btn-success" %>
+        <% elsif item.starting? %>
+          <%= button_to 'Pause', admin_item_pause_path(item), method: :post, class: "btn btn-info" %>
+          <%= button_to 'End', admin_item_end_path(item), method: :post, class: "btn btn-warning" %>
+          <%= button_to 'Cancel', admin_item_cancel_path(item), method: :post, class: "btn btn-danger" %>
+        <% end %>
+      </td>
+      <td>
+        <%= link_to 'Edit', edit_admin_item_path(item) %>
+        <%= button_to 'Delete', admin_item_path(item), method: :delete %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<%= link_to 'New Item', new_admin_item_path %>
