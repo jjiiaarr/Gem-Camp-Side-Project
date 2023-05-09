@@ -4,7 +4,7 @@
       <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
         <button type="button" class="btn btn-light">Share</button>
         <%= link_to 'Invite', client_invites_path, class: "btn btn-light" %>
-        <button type="button" class="btn btn-light">Lottery</button>
+        <%= link_to 'Lottery', client_lottery_index_path, class: "btn btn-light" %>
         <button type="button" class="btn btn-light">Shop</button>
         <%= link_to 'Me', client_profile_path, class: "btn btn-light" if current_user %>
       </div>
