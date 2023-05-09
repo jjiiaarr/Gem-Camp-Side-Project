@@ -1,0 +1,33 @@
+<section>
+  <div class="container">
+    <div class="row d-flex justify-content-center align-items-center">
+      <div class="col-sm-12 col-md-11 col-lg-10 col-xl-9 col-xxl-8">
+        <div class="mt-3">
+          <%= link_to 'All', client_lottery_index_path %>
+          <% @categories.each do |category| %>
+            <%= link_to category.name, client_lottery_index_path(category_id: category.id) %>
+          <% end %>
+        </div>
+        <div class="mt-3">
+          <div class="row d-flex">
+            <% @items.each do |item| %>
+            <div class="col-6">
+              <div class="card mb-4" style="border-radius: 0;">
+                <div class="card-body">
+                  <div class="container">
+                    <%=(image_tag item.image.url) %>
+                    <div class="text-center"> <%= item.name %></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="mb-4 text-end">
+          <button type="button" class="btn btn-light">More...</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

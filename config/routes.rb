@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       resource :profile, only: [:show, :edit]
       resources :invites, only: :index
       resources :user_addresses
+      resources :lottery
     end
   end
 
@@ -17,15 +18,14 @@ Rails.application.routes.draw do
       resources :home
       devise_for :users, controllers: { sessions: 'admin/sessions' }
       resources :user_list
-      resources :item do
-        member do
+      resources :items do
           post :start
           post :pause
           post :end
           post :cancel
-        end
       end
       resources :categories, except: :show
+
     end
   end
 
