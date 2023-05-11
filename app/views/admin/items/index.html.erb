@@ -16,7 +16,7 @@
   </thead>
   <% @items.each do |item| %>
     <tr>
-      <td><%= image_tag item.image.url if item.image.present? %></td>
+      <td><%= image_tag item.image.url, height: "100", width: "100" if item.image.present? %></td>
       <td><%= item.name %></td>
       <td><%= item.quantity %></td>
       <td><%= item.minimum_bets %></td>

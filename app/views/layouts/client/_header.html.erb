@@ -4,8 +4,10 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-          <button type="button" class="btn btn-light">Coins</button>
-          <button type="button" class="btn btn-light">Claim</button>
+          <% if user_signed_in? %>
+            <button type="button" class="btn btn-light">Coins <%= current_user.coins %></button>
+            <button type="button" class="btn btn-light">Claim</button>
+          <% end %>
           <button type="button" class="btn btn-light">Language</button>
 
           <div class="btn-group" role="group">
@@ -19,11 +21,16 @@
                 <p>Coins: </p>
                 <div class="d-grid gap-2">
                   <button class="btn btn-primary" type="button">Cash In</button>
-                </div> <br />
+                </div>
+                <br/>
               </div>
               <li><a class="dropdown-item" href="#">Contact Us</a></li>
               <li><a class="dropdown-item" href="#">My Profile</a></li>
-              <li><%= link_to 'Sign out', destroy_user_session_path, data: { 'turbo-method': :delete }, class: "dropdown-item" %></li>
+              <% if user_signed_in? %>
+                <li><%= link_to 'Sign out', destroy_user_session_path, data: { 'turbo-method': :delete }, class: "dropdown-item" %></li>
+              <% else %>
+                <li><%= link_to 'Sign in', new_user_session_path, class: "dropdown-item" %></li>
+              <% end %>
             </ul>
           </div>
         </div>
