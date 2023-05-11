@@ -48,6 +48,6 @@ class Client::UserAddressesController < ApplicationController
   end
 
   def address_params
-    params.require(:user_address).permit(:genre, :name, :street, :phone, :remark, :address_region_id, :address_province_id, :address_city_id, :address_barangay_id)
+    params.require(:user_address).permit(:genre, :name, :street, :phone, :remark, :address_region_id, :address_province_id, :address_city_id, :address_barangay_id, :is_default)
   end
 end

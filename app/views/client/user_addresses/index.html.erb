@@ -11,6 +11,7 @@
   <td>Barangay</td>
   <td>Phone number</td>
   <td>Remark</td>
+  <td>Default Address</td>
   </thead>
   <% @user_addresses.each do |address| %>
     <tr>
@@ -23,6 +24,7 @@
       <td><%= address.barangay&.name %></td>
       <td><%= address.phone %></td>
       <td><%= address.remark %></td>
+      <td><%= address.is_default %></td>
       <td>
         <%= link_to 'Edit', edit_client_user_address_path(address) %>
         <%= button_to 'Delete', client_user_address_path(address), method: :delete %>
