@@ -1,10 +1,10 @@
 class Item < ApplicationRecord
 
-  validates :category_id, presence: true
+  validates :category_ids, presence: true
   validates :image, presence: true
   validates :name, presence: true, uniqueness: true
-  validates :quantity, presence: true
-  validates :minimum_bets, presence: true
+  validates :quantity, presence: true, numericality: {greater_than: 0}
+  validates :minimum_bets, presence: true, numericality: {greater_than: 0}
   validates :online_at, presence: true
   validates :offline_at, presence: true
   validates :start_at, presence: true
