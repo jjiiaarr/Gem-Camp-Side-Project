@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_11_070249) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_11_164010) do
   create_table "address_barangays", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "city_id"
     t.string "code"
@@ -47,13 +47,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_070249) do
 
   create_table "bets", charset: "utf8mb4", force: :cascade do |t|
     t.integer "item_id"
-    t.integer "client_id"
     t.integer "batch_count"
     t.integer "coins", default: 1
     t.string "state"
     t.integer "serial_number"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
   end
 
   create_table "categories", charset: "utf8mb4", force: :cascade do |t|
@@ -86,16 +86,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_070249) do
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
     t.integer "category_id"
-  end
-
-  create_table "orders", charset: "utf8mb4", force: :cascade do |t|
-    t.decimal "amount", precision: 12, scale: 2
-    t.string "serial_number"
-    t.bigint "item_id"
-    t.string "state"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["item_id"], name: "index_orders_on_item_id"
   end
 
   create_table "user_addresses", charset: "utf8mb4", force: :cascade do |t|
