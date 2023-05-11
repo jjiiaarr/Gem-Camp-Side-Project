@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_11_022239) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_11_070249) do
   create_table "address_barangays", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "city_id"
     t.string "code"
@@ -131,7 +131,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_11_022239) do
     t.string "username"
     t.decimal "coins", precision: 18, scale: 2, default: "0.0"
     t.string "total_deposit"
-    t.integer "children_members"
+    t.integer "children_members", default: 0
     t.string "image"
     t.integer "parent_id"
     t.index ["email"], name: "index_users_on_email", unique: true
