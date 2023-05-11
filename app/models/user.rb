@@ -18,4 +18,5 @@ class User < ApplicationRecord
   has_many :children, class_name: 'User', foreign_key: :parent_id
 
   has_many :user_address
+  has_many :bets
 end
