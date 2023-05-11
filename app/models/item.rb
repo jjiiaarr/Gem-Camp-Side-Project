@@ -1,5 +1,7 @@
 class Item < ApplicationRecord
 
+  scope :filter_by_category, -> (category_name) { includes(:categories).where(categories: {name: category_name}) }
+
   validates :category_ids, presence: true
   validates :image, presence: true
   validates :name, presence: true, uniqueness: true
@@ -51,4 +53,6 @@ class Item < ApplicationRecord
   def can_start?
     quantity > 0 && Time.current < offline_at && status == 'active'
   end
+
+
 end

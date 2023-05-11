@@ -1,9 +1,7 @@
 class Client::LotteryController < ApplicationController
   def index
-
     @categories = Category.all
-    @selected_category = params[:category_id]
-    @items = Item.active.starting
-    @items = @items.where(category_id: @selected_category) if @selected_category.present?
+    @items = Item.includes(:categories).active.starting
+    @items = @items.filter_by_category(params[:name]) if params[:name].present?
   end
 end

@@ -5,7 +5,7 @@
         <div class="mt-3">
           <%= link_to 'All', client_lottery_index_path %>
           <% @categories.each do |category| %>
-            <%= link_to category.name, client_lottery_index_path(category_id: category.id) %>
+            <%= link_to category.name, client_lottery_index_path(name: category.name) %>
           <% end %>
         </div>
         <div class="mt-3">
