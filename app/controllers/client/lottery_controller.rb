@@ -7,7 +7,7 @@ class Client::LotteryController < ApplicationController
 
   def show
     @bets = Bet.includes(:user, :item).all
-    @item = Item.active.starting.find(params[:id])
+    @item = Item.find(params[:id])
     @bet = Bet.new
     @client_serial_number = @bets.where(user: current_user, batch_count: @item.batch_count, item: @item)
     @item_batch_count = @item.bets.where(batch_count: @item.batch_count).count

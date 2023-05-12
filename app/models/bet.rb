@@ -33,8 +33,8 @@ class Bet < ApplicationRecord
   end
 
   def generate_serial_number
-    number_count = Bet.where(batch_count: batch_count, item_id: item_id).count.to_s.rjust(4, '0')
-    serial_number = "#{Time.current.strftime("%y%m%d")}-#{item_id}-#{batch_count}-#{number_count}"
+    number_count = Bet.where(batch_count: batch_count, item: item_id).count.to_s.rjust(4, '0')
+    serial_number = "#{Time.current.strftime("%y%m%d")}-#{item.id}-#{item.batch_count}-#{number_count}"
     self.update(serial_number: serial_number)
   end
 

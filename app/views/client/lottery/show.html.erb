@@ -21,6 +21,7 @@
                   <div class="input-group">
                     <button type="button" data-action="click->button#betMinus" data-value="1" class="bi bi bi-dash-square btn btn-light"></button>
                     <%= f.number_field :coins, class: "form-control text-center", value: 1, data: { button_target: 'coins' } %>
+                    <%= f.hidden_field :item_id, value: params[:id] %>
                     <button type="button" data-action="click->button#betPlus" data-value="1" class="bi bi bi-plus-square btn btn-light"></button>
                   </div>
 
