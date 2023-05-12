@@ -1,4 +1,5 @@
 class Client::LotteryController < ApplicationController
+  before_action :authenticate_user!, except: :index
   def index
     @categories = Category.all
     @items = Item.includes(:categories).active.starting
@@ -7,7 +8,7 @@ class Client::LotteryController < ApplicationController
 
   def show
     @bets = Bet.includes(:user, :item).all
-    @item = Item.find(params[:id])
+    @item = Item.active.starting.find(params[:id])
     @bet = Bet.new
     @client_serial_number = @bets.where(user: current_user, batch_count: @item.batch_count, item: @item)
     @item_batch_count = @item.bets.where(batch_count: @item.batch_count).count

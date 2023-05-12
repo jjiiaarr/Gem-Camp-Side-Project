@@ -45,7 +45,7 @@ class Item < ApplicationRecord
     end
 
     event :cancel do
-      transitions from: [:starting, :paused], to: :cancelled
+      transitions from: [:starting, :paused], to: :cancelled, success: :cancel_bets
     end
   end
 
@@ -55,5 +55,9 @@ class Item < ApplicationRecord
     quantity > 0 && Time.current < offline_at && status == 'active'
   end
 
-
+  def cancel_bets
+    bets.where(batch_count: batch_count).each do |bet|
+      bet.cancel! if bet.may_cancel?
+    end
+  end
 end
