@@ -1,6 +1,17 @@
 class Winner < ApplicationRecord
   include AASM
 
+  scope :filter_by_serial_number, -> (serial_number) { where(winners: {serial_number: serial_number}) }
+  scope :filter_by_email, -> (email) { join(:user).where(users: {name: email}) }
+  scope :filter_by_state, -> (state) { where(winners: {name: state}) }
+  scope :filter_by_date_range, -> (date_range) { where(winners: {created_at: date_range}) }
+
+  belongs_to :user
+  belongs_to :bet
+  belongs_to :item
+  belongs_to :admin, class_name: 'User', optional: true
+  belongs_to :user_addresses, optional: true
+
   aasm column: :state do
     state :won, initial: true
     state :claimed, :submitted, :paid, :shipped,

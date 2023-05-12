@@ -11,8 +11,10 @@ class Bet < ApplicationRecord
   validates :coins, numericality: { greater_than: 0 }
   belongs_to :user
   belongs_to :item
+  has_many :winners
   after_create :deduct_coins, :generate_serial_number
   after_validation :coins_available?
+
 
   aasm column: :state do
     state :betting, initial: true

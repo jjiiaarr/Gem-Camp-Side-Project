@@ -28,6 +28,15 @@ Rails.application.routes.draw do
       resources :bets do
         post :cancel
       end
+      resources :winners do
+        post :submit
+        post :pay
+        post :ship
+        post :deliver
+        post :publish
+        post :remove_publish
+
+      end
 
     end
   end

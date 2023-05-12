@@ -19,4 +19,6 @@ class User < ApplicationRecord
 
   has_many :user_address
   has_many :bets
+  has_many :winners
+  has_many :winners, class_name: 'Winner', foreign_key: :admin_id
 end

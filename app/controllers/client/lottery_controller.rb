@@ -19,7 +19,6 @@ class Client::LotteryController < ApplicationController
 
   def create
 
-    params[:bet][:coins] = 1
     params[:bet][:coins].to_i.times do
       @bet = Bet.new(item_params)
       @item = Item.find(params[:bet][:item_id])
