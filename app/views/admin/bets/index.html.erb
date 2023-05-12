@@ -1,0 +1,31 @@
+<%= form_with model: @bet, url: admin_bets_path, method: :get do %>
+
+  <%= text_field_tag :serial_number, params[:serial_number], placeholder: "Enter serial number" %>
+  <%= text_field_tag :item_name, params[:item_name], placeholder: "Enter item name" %>
+  <%= text_field_tag :email, params[:email], placeholder: "Enter email" %>
+  <%= select_tag :state, options_for_select(['betting', 'won', 'lost', 'cancelled'],params[:state]), include_blank: true, class: "btn btn-warning dropdown-toggle"  %>
+  <%= date_field_tag :start_date, params[:start_date] %>
+  <%= date_field_tag :end_date, params[:end_date] %>
+
+  <%= submit_tag "Submit", class: "btn btn-primary btn-block" %>
+<% end %>
+
+<table>
+  <thead>
+  <td>Serial Number</td>
+  <td>Item Name</td>
+  <td>Email</td>
+  <td>State</td>
+  <td>Start date to End date</td>
+  </thead>
+  <% @bets.each do |bet| %>
+    <tr>
+      <td><%= bet.serial_number %></td>
+<!--      <td><%#= bet.item.name %></td>-->
+      <td><%= bet.user.email %></td>
+      <td><%= bet.state %></td>
+      <td><%= bet.created_at %></td>
+    <td><%= button_to 'Cancel', admin_bet_cancel_path(bet), data: {turbo: false}, class: "btn btn-danger" if bet.may_cancel? %></td>
+  <% end %>
+  </tr>
+</table>

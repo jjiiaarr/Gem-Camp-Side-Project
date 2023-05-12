@@ -1,4 +1,5 @@
 class Admin::ItemsController < ApplicationController
+
   layout 'admin'
 
   before_action :set_item, except: [:index, :new, :create]
@@ -35,8 +36,13 @@ class Admin::ItemsController < ApplicationController
   end
 
   def destroy
-    @item.destroy
-    flash[:notice] = 'Item deleted successfully'
+    if @item.bets.any?
+      @item.destroy
+      flash[:notice] = 'Item deleted successfully'
+    else
+      flash[:alert] = "Item fail to delete"
+    end
+
     redirect_to admin_items_path
   end
 

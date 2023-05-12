@@ -25,6 +25,9 @@ Rails.application.routes.draw do
           post :cancel
       end
       resources :categories, except: :show
+      resources :bets do
+        post :cancel
+      end
 
     end
   end

@@ -1,6 +1,13 @@
 class Bet < ApplicationRecord
   include AASM
 
+
+  scope :filter_by_serial_number, -> (serial_number) { where(bets: {serial_number: serial_number}) }
+  scope :filter_by_item_name, -> (item_name) { join(:item).where(items: {name: item_name}) }
+  scope :filter_by_email, -> (email) { join(:user).where(users: {name: email}) }
+  scope :filter_by_state, -> (state) { where(bets: {name: state}) }
+  scope :filter_by_date_range, -> (date_range) { where(items: {created_at: date_range}) }
+
   validates :coins, numericality: { greater_than: 0 }
   belongs_to :user
   belongs_to :item
