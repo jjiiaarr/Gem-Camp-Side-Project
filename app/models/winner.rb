@@ -10,7 +10,7 @@ class Winner < ApplicationRecord
   belongs_to :bet
   belongs_to :item
   belongs_to :admin, class_name: 'User', optional: true
-  belongs_to :user_addresses, optional: true
+  belongs_to :user_address, optional: true
 
   aasm column: :state do
     state :won, initial: true

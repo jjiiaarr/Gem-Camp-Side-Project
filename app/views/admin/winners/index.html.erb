@@ -20,17 +20,17 @@
   </thead>
   <% @winners.each do |winner| %>
     <tr>
-      <td><%= winner.serial_number %></td>
+      <td><%= winner.bet.serial_number %></td>
       <!--      <td><%#= winner.item.name %></td>-->
       <td><%= winner.user.email %></td>
       <td><%= winner.state %></td>
       <td><%= winner.created_at %></td>
-      <td><%= button_to 'Submit', admin_winner_submit_path(winner), data: {turbo: false}, class: "btn btn-danger" if bet.may_submit? %></td>
-      <td><%= button_to 'Pay', admin_winner_pay_path(winner), data: {turbo: false}, class: "btn btn-danger" if bet.may_pay? %></td>
-      <td><%= button_to 'Ship', admin_winner_ship_path(winner), data: {turbo: false}, class: "btn btn-danger" if bet.may_ship? %></td>
-      <td><%= button_to 'Deliver', admin_winner_deliver_path(winner), data: {turbo: false}, class: "btn btn-danger" if bet.may_deliver? %></td>
-      <td><%= button_to 'Publish', admin_winner_publish_path(winner), data: {turbo: false}, class: "btn btn-danger" if bet.may_publish? %></td>
-      <td><%= button_to 'Remove Publish', admin_winner_remove_publish_path(winner), data: {turbo: false}, class: "btn btn-danger" if bet.remove_publish? %></td>
+      <td><%= button_to 'Submit', admin_winner_submit_path(winner), data: {turbo: false}, class: "btn btn-danger" if winner.may_submit? %></td>
+      <td><%= button_to 'Pay', admin_winner_pay_path(winner), data: {turbo: false}, class: "btn btn-danger" if winner.may_pay? %></td>
+      <td><%= button_to 'Ship', admin_winner_ship_path(winner), data: {turbo: false}, class: "btn btn-danger" if winner.may_ship? %></td>
+      <td><%= button_to 'Deliver', admin_winner_deliver_path(winner), data: {turbo: false}, class: "btn btn-danger" if winner.may_deliver? %></td>
+      <td><%= button_to 'Publish', admin_winner_publish_path(winner), data: {turbo: false}, class: "btn btn-danger" if winner.may_publish? %></td>
+      <td><%= button_to 'Remove Publish', admin_winner_remove_publish_path(winner), data: {turbo: false}, class: "btn btn-danger" if winner.may_remove_publish? %></td>
   <% end %>
   </tr>
 </table>
