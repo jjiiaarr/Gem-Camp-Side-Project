@@ -67,12 +67,17 @@ class Item < ApplicationRecord
   end
 
   def pick_winner
-    lucky_winner = bets.betting.where( batch_count: batch_count).sample
-    bets.betting.where.not( batch_count: batch_count).each do |loser|
-      loser.lost!
-    end
-    lucky_winner.win!
-    Winner.create(item_id: lucky_winner.item, bet_id: lucky_winner.bet, user_id: lucky_winner.user.id, address_id: lucky_winner.user.address)
+    betting_list = bets.where(batch_count: batch_count, state: :betting)
+    winner_bet = betting_list.sample
+    winner_bet.win!
+    betting_list.where.not(id: winner_bet.id).update_all(state: :lost)
+    winners.create!(
+      user: winner_bet.user,
+      item_batch_count: batch_count,
+      user_address: winner_bet.user.user_addresses.find_by(is_default: true),
+      bet: winner_bet,
+      admin: User.find_by(genre: 1)
+    )
   end
 end
 
