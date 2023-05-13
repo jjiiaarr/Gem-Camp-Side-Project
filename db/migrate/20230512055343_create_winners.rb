@@ -4,7 +4,7 @@ class CreateWinners < ActiveRecord::Migration[7.0]
       t.references :item
       t.references :bet
       t.references :user
-      t.references :address
+      t.references :user_address
       t.integer :item_batch_count
       t.string :state
       t.integer :price

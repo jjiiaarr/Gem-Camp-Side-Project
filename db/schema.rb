@@ -132,7 +132,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_055343) do
     t.bigint "item_id"
     t.bigint "bet_id"
     t.bigint "user_id"
-    t.bigint "address_id"
+    t.bigint "user_address_id"
     t.integer "item_batch_count"
     t.string "state"
     t.integer "price"
@@ -142,10 +142,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_12_055343) do
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["address_id"], name: "index_winners_on_address_id"
     t.index ["admin_id"], name: "index_winners_on_admin_id"
     t.index ["bet_id"], name: "index_winners_on_bet_id"
     t.index ["item_id"], name: "index_winners_on_item_id"
+    t.index ["user_address_id"], name: "index_winners_on_user_address_id"
     t.index ["user_id"], name: "index_winners_on_user_id"
   end
 
