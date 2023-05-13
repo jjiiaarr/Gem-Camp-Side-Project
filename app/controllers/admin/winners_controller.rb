@@ -1,6 +1,6 @@
 class Admin::WinnersController < ApplicationController
   def index
-    @winners = Winner.all
+    @winners = Winner.includes(:user, :item, :bet).all
     @winners = @winners.filter_by_serial_number(params[:serial_number]) if params[:serial_number].present?
     @winners = @winners.filter_by_item_name(params[:item_name]) if params[:item_name].present?
     @winners = @winners.filter_by_email(params[:email]) if params[:email].present?
