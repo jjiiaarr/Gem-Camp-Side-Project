@@ -1,0 +1,46 @@
+<%= form_with model: offer, url: path, method: method do |f| %>
+
+  <% if @offer.errors.any? %>
+    <ul>
+      <% @offer.errors.each do |error| %>
+        <li class="list-unstyled alert alert-danger"><%= error.full_message %></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <div class="form">
+    <%= f.label :image, class: "form-label" %>
+    <%= f.file_field :image, class: "form-control" %>
+  </div>
+
+  <div class="form">
+    <%= f.label :name, class: "form-label" %>
+    <%= f.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="form">
+    <%= f.label :genre, class: 'form-label' %><br>
+    <%= f.select :genre, options_for_select(Offer.genres.map { |key, value| [key.humanize, key] }),
+                 { prompt: "Select Genre" }, class: 'form-control mt-1 mb-1' %>
+  </div>
+
+  <div class="form">
+    <%= f.label :status, class: 'form-label' %><br>
+    <%= f.select :status, options_for_select(Offer.statuses.map { |key, value| [key.humanize, key] }),
+                 { prompt: "Select Status" }, class: 'form-control mt-1 mb-1' %>
+  </div>
+
+  <div class="form">
+    <%= f.label :amount, class: 'form-label' %><br>
+    <%= f.number_field :amount, class: 'form-control mt-1 mb-1' %>
+  </div>
+
+  <div class="form">
+    <%= f.label :coin, class: 'form-label' %><br>
+    <%= f.number_field :coin, class: 'form-control mt-1 mb-1' %>
+  </div>
+
+  <div class="my-2">
+    <%= f.submit class: 'btn btn-warning' %>
+  </div>
+<% end %>

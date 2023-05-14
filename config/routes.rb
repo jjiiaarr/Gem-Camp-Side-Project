@@ -35,9 +35,8 @@ Rails.application.routes.draw do
         post :deliver
         post :publish
         post :remove_publish
-
       end
-
+      resources :offers
     end
   end
 

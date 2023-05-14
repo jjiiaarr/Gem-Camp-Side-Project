@@ -1,0 +1,43 @@
+<%= form_with model: @offer, url: admin_offers_path, method: :get do %>
+
+  <div class="col-md-4">
+  <%= label_tag :genre %>
+  <%= select_tag :genre, options_for_select(Offer.genres.keys.map { |genre| [genre.humanize, genre] }, params[:genre]), { prompt: 'Genre', class: "form-select" } %>
+  </div>
+
+  <div class="col-md-4">
+    <%= label_tag :status %>
+    <%= select_tag :status, options_for_select(Offer.statuses.keys.map { |status| [status.humanize, status] }, params[:status]), { prompt: 'Status', class: "form-select" } %>
+  </div>
+  <%= submit_tag "Search", class: "btn btn-success" %> </br>
+<% end %>
+<br/>
+<table class="table table-hover table-sm table-responsive text-center">
+  <thead>
+  <tr>
+    <td>Image</td>
+    <td>Name</td>
+    <td>Genre</td>
+    <td>Status</td>
+    <td>Amount</td>
+    <td>Coin</td>
+    <td>Actions</td>
+  </tr>
+  </thead>
+  <% @offers.each do |offer| %>
+    <tbody>
+    <tr>
+      <td><%= image_tag "#{offer.image.url}", width: "100", height: "100", alt: "Offer image" %></td>
+      <td><%= offer.name %></td>
+      <td><%= offer.genre %></td>
+      <td><%= offer.status %></td>
+      <td><%= offer.amount %></td>
+      <td><%= offer.coin %></td>
+      <td><%= link_to 'Edit', edit_admin_offer_path(offer), class: 'btn btn-warning me-2' %></td>
+      <td><%= button_to 'Delete', admin_offer_path(offer), class: 'btn btn-danger me-2', onclick: "return confirm('Are you sure you want to delete?')", method: :delete %></td>
+    </tr>
+    </tbody>
+  <% end %>
+</table>
+
+<%= link_to 'New Offer', new_admin_offer_path, class: 'btn btn-warning mt-3' %>
