@@ -1,0 +1,14 @@
+<% @offers.each do |offer| %>
+<div class="row-cols-auto justify-content-center text-center d-lg-inline-block">
+<%= image_tag offer.image.url, width: "100", height: "100", alt: "Offer image" %>
+
+  <p><%= offer.name %></p>
+  <p>Amount : <%= offer.amount %></p>
+  <p>Coins: <%= offer.coin %></p>
+
+  <%= form_with model: @order, url: client_shops_path, method: :post do |f| %>
+    <%= f.hidden_field :offer_id, class: "form-control", value: offer.id %>
+    <%= f.submit 'Place Order', { class: "btn btn-success", onclick: "return confirm('Are you sure you order this #{offer.name}')" } %>
+    <% end %>
+</div>
+<% end %>

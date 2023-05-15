@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       resources :invites, only: :index
       resources :user_addresses
       resources :lottery
+      resources :shops
     end
   end
 
