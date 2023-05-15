@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_14_190632) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_15_134804) do
   create_table "address_barangays", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "city_id"
     t.string "code"
@@ -146,7 +146,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_14_190632) do
     t.string "phone_number"
     t.string "username"
     t.decimal "coins", precision: 18, scale: 2, default: "0.0"
-    t.string "total_deposit"
+    t.decimal "total_deposit", precision: 18, scale: 2, default: "0.0"
     t.integer "children_members", default: 0
     t.string "image"
     t.integer "parent_id"
@@ -158,7 +158,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_14_190632) do
     t.bigint "item_id"
     t.bigint "bet_id"
     t.bigint "user_id"
-    t.bigint "user_address_id"
+    t.bigint "address_id"
     t.integer "item_batch_count"
     t.string "state"
     t.integer "price"
@@ -168,10 +168,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_14_190632) do
     t.string "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["address_id"], name: "index_winners_on_address_id"
     t.index ["admin_id"], name: "index_winners_on_admin_id"
     t.index ["bet_id"], name: "index_winners_on_bet_id"
     t.index ["item_id"], name: "index_winners_on_item_id"
-    t.index ["user_address_id"], name: "index_winners_on_user_address_id"
     t.index ["user_id"], name: "index_winners_on_user_id"
   end
 
