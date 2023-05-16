@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_15_144724) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_16_095338) do
   create_table "address_barangays", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "city_id"
     t.string "code"
@@ -46,7 +46,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_15_144724) do
   end
 
   create_table "bets", charset: "utf8mb4", force: :cascade do |t|
-    t.integer "item_id"
     t.integer "batch_count"
     t.integer "coins", default: 1
     t.string "state"
@@ -54,6 +53,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_15_144724) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.bigint "item_id_id"
+    t.index ["item_id_id"], name: "index_bets_on_item_id_id"
   end
 
   create_table "categories", charset: "utf8mb4", force: :cascade do |t|
