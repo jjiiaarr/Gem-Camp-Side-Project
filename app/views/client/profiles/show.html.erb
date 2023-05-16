@@ -6,11 +6,61 @@
     <p>Coins: <%= @user.coins %> </p>
     <div class="d-grid gap-2">
       <button class="btn btn-primary" type="button">Cash In</button>
-    </div> <br />
+    </div>
+    <br/>
     <div class="d-grid gap-2 d-md-inline-block">
-      <%= link_to 'Edit Profile', edit_user_registration_path  ,class: "btn btn-primary" %>
-      <%= link_to 'Address', client_user_addresses_path  ,class: "btn btn-primary" %>
+      <%= link_to 'Edit Profile', edit_user_registration_path, class: "btn btn-primary" %>
+      <%= link_to 'Address', client_user_addresses_path, class: "btn btn-primary" %>
       <br/>
     </div>
+    <br/>
+    <div class="d-grid gap-2 d-md-inline-block mt-3">
+      <%= link_to 'Order History', client_profile_path(order: 'order'), class: "btn btn-primary" %>
+      <%= link_to 'Lottery History', client_profile_path(lottery: 'lottery'), class: "btn btn-success" %>
+      <%= link_to 'Winning History', client_profile_path(winner: 'winner'), class: "btn btn-warning" %>
+      <%= link_to 'Invitation History', client_profile_path(invitation: 'invitation'), class: "btn btn-danger" %>
+    </div>
+    <hr/>
+    <table class="table table-hover responsive">
+      <tbody>
+      <% @order_history&.each do |order| %>
+        <tr>
+          <td class="card">
+            Serial Number : <%= order.serial_number %> <br/>
+            Amount : <%= order.amount %> <br/>
+            Coins : <%= order.coin %> <br/>
+            Created at: <%= order.created_at %>
+          </td>
+        </tr>
+      <% end %>
+      <% @lottery_history&.each do |lottery| %>
+        <tr>
+          <td class="card">
+            Serial Number : <%= lottery.serial_number %> <br/>
+            Item : <%= lottery.item.name %> <br/>
+            Created_at : <%= lottery.created_at %>
+            State : <%= lottery.state %>
+          </td>
+        </tr>
+      <% end %>
+      <% @winner_history&.each do |winner| %>
+        <tr>
+          <td class="card">
+            Item Name : <%= winner.item.name %> <br/>
+            Created_at : <%= winner.created_at %> <br/>
+            State : <%= winner.state %>
+          </td>
+        </tr>
+      <% end %>
+      <% @invitation_history&.each do |invite| %>
+        <tr>
+          <td class="card">
+            Email : <%= invite.email %> <br/>
+            Created_at : <%= invite.created_at %> <br/>
+          </td>
+        </tr>
+      <% end %>
+      </tbody>
+    </table>
   </div>
 </div>
