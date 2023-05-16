@@ -1,0 +1,10 @@
+<h1>Congratulations! &#127881;</h1>
+<h3>You can claim your <%= @winner.item.name %> &#127942;</h3>
+
+<div class="col-md-4">
+  <%= form_with model: @winner, url: client_claim_path, method: :patch do |f| %>
+    <%= f.label :user_address, class: "form-label" %>
+    <%= f.select :user_address_id, options_for_select(current_user.user_addresses.map { |address| [address.address_concatenation, address.id] }), { prompt: "Select Address" }, class: "form-select" %>
+    <%= f.submit 'Submit', class: "btn btn-success mt-2" %>
+  <% end %>
+</div>

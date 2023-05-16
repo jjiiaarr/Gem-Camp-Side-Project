@@ -49,6 +49,7 @@
             Item Name : <%= winner.item.name %> <br/>
             Created_at : <%= winner.created_at %> <br/>
             State : <%= winner.state %>
+            <%= link_to 'Claim Prize', client_claim_path(winner), class: "btn btn-success" if winner.may_claim? %>
           </td>
         </tr>
       <% end %>

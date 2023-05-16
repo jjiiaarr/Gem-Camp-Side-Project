@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       resources :user_addresses
       resources :lottery
       resources :shops
+      resources :claim
     end
   end
 
