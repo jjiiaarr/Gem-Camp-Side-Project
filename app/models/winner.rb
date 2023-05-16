@@ -1,10 +1,11 @@
 class Winner < ApplicationRecord
   include AASM
 
-  scope :filter_by_serial_number, -> (serial_number) { where(winners: {serial_number: serial_number}) }
-  scope :filter_by_email, -> (email) { join(:user).where(users: {name: email}) }
-  scope :filter_by_state, -> (state) { where(winners: {name: state}) }
-  scope :filter_by_date_range, -> (date_range) { where(winners: {created_at: date_range}) }
+  scope :filter_by_serial_number, -> (serial_number) { where(bets: {serial_number: serial_number}) }
+  scope :filter_by_item_name, -> (item_name) { where(items: {name: item_name}) }
+  scope :filter_by_email, -> (email) { joins(:user).where(users: { email: email }) }
+  scope :filter_by_state, -> (state) { where(state: state) }
+  scope :filter_by_date_range, -> (date_range) { where({created_at: date_range}) }
 
   belongs_to :user
   belongs_to :bet

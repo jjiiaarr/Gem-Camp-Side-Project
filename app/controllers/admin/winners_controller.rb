@@ -1,13 +1,15 @@
 class Admin::WinnersController < ApplicationController
   before_action :set_winner, except: :index
 
+  layout 'admin'
+
   def index
     @winners = Winner.includes(:user, :item, :bet).all
     @winners = @winners.filter_by_serial_number(params[:serial_number]) if params[:serial_number].present?
     @winners = @winners.filter_by_item_name(params[:item_name]) if params[:item_name].present?
     @winners = @winners.filter_by_email(params[:email]) if params[:email].present?
     @winners = @winners.filter_by_state(params[:state]) if params[:state].present?
-    @winners = @winners.filter_by_date_range(params[:start_date].to_date..params[end_date].to_date) if params[:start_date].present? && params[:end_date].present?
+    @winners = @winners.filter_by_date_range(params[:start_date].to_date..params[:end_date].to_date) if params[:start_date].present? && params[:end_date].present?
   end
 
   def submit
