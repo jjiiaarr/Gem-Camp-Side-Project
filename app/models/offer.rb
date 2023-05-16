@@ -6,6 +6,7 @@ class Offer < ApplicationRecord
   validates :amount, presence: true, numericality: { greater_than: 0 }
   validates :genre, presence: true
   validates :status, presence: true
+  has_many :orders
 
   mount_uploader :image, ImageUploader
 

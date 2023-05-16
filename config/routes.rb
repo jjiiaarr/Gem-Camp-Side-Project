@@ -38,6 +38,9 @@ Rails.application.routes.draw do
         post :remove_publish
       end
       resources :offers
+      resources :orders do
+        post :pay, :cancel
+      end
     end
   end
 

@@ -1,0 +1,75 @@
+<%= form_with model: @order, url: admin_orders_path , method: :get do %>
+
+  <div class="col-md-4 mt-3">
+    <%= text_field_tag :serial_number, params[:serial_number], placeholder: "Enter serial number" %>
+  </div>
+
+  <div class="col-md-4 mt-3">
+    <%= text_field_tag :email, params[:email], placeholder: "Enter email" %>
+  </div>
+
+  <div class="col-md-4 mt-3">
+    <%= label_tag :genre %>
+    <%= select_tag :genre, options_for_select(Order.genres.keys.map { |genre| [genre.humanize, genre] }, params[:genre]), { prompt: 'Select Genre', class: "form-select" } %>
+  </div>
+
+  <div class="col-md-4">
+    <%= label_tag :state %>
+    <%= select_tag :state, options_for_select(Order.aasm.states.map(&:name), params[:state]), { prompt: 'Select State', class: "form-select" } %>
+  </div>
+
+  <div class="col-md-4">
+    <%= label_tag :start_date %>
+    <%= date_field_tag :start_date, params[:start_at], class: "form-control" %>
+  </div>
+
+  <div class="col-md-4">
+    <%= label_tag :end_date %>
+    <%= date_field_tag :ended_at, params[:ended_at], class: "form-control" %>
+  </div>
+
+  <%= submit_tag "Search", class: "btn btn-success mt-3" %> </br>
+<% end %>
+<br/>
+
+<div class="form-label">
+  <p>Total Amount: <%= @amount_sum %></p>
+  <p>Subtotal Amount: <%= @subtotal_amount %></p>
+</div>
+
+<div class="form-label">
+  <p>Total Coins: <%= @coin_sum %></p>
+  <p>Subtotal Coins: <%= @subtotal_coin %></p>
+</div>
+
+<table class="table table-hover table-sm table-responsive text-center">
+  <thead>
+  <tr>
+    <td>Serial Number</td>
+    <td>Email</td>
+    <td>Genre</td>
+    <td>State</td>
+    <td>Offer</td>
+    <td>Amounts</td>
+    <td>Coins</td>
+    <td>Date</td>
+    <td>Action</td>
+  </tr>
+  </thead>
+  <% @orders.each do |order| %>
+    <tbody>
+    <tr>
+      <td><%= order.serial_number %></td>
+      <td><%= order.user.email %></td>
+      <td><%= order.genre %></td>
+      <td><%= order.state %></td>
+      <td><%= order.offer&.name %></td>
+      <td><%= order.amount %></td>
+      <td><%= order.coin %></td>
+      <td><%= order.created_at %></td>
+      <td><%= button_to 'Cancel', admin_order_cancel_path(order), data: { turbo: false }, class: "btn btn-danger" if order.may_cancel? %></td>
+      <td><%= button_to 'Pay', admin_order_pay_path(order), data: { turbo: false }, class: "btn btn-warning" if order.may_pay? %></td>
+    </tr>
+    </tbody>
+  <% end %>
+</table>
