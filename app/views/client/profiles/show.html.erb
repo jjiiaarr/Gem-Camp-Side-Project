@@ -50,6 +50,7 @@
             Created_at : <%= winner.created_at %> <br/>
             State : <%= winner.state %>
             <%= link_to 'Claim Prize', client_claim_path(winner), class: "btn btn-success" if winner.may_claim? %>
+            <%= link_to 'Share Feedback', client_feedback_path(winner), class: "btn btn-success" if winner.may_share? %>
           </td>
         </tr>
       <% end %>

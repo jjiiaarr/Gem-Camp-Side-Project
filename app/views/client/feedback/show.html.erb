@@ -1,0 +1,16 @@
+<div class="col-md-4">
+  <%= form_with model: @winner, url: client_feedback_path, method: :patch do |f| %>
+
+    <div class="col-md4">
+      <%= f.label :picture, class: "form-label" %>
+      <%= f.file_field :picture, class: "form-control" %>
+    </div>
+
+    <div class="col-md4">
+      <%= f.label :message, class: "form-label" %>
+      <%= f.text_area :comment, class: "form-control" %>
+    </div>
+
+    <%= f.submit 'Submit', class: "btn btn-success mt-2" %>
+  <% end %>
+</div>

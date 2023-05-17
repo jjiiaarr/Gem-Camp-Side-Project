@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       resources :lottery
       resources :shops
       resources :claim
+      resources :feedback
     end
   end
 
@@ -31,12 +32,7 @@ Rails.application.routes.draw do
         post :cancel
       end
       resources :winners do
-        post :submit
-        post :pay
-        post :ship
-        post :deliver
-        post :publish
-        post :remove_publish
+        post :submit, :pay , :ship , :deliver , :share,  :publish , :remove_publish
       end
       resources :offers
       resources :orders do
