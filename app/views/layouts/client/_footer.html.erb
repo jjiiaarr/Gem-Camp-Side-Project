@@ -2,7 +2,7 @@
   <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
       <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-        <button type="button" class="btn btn-light">Share</button>
+        <%= link_to 'Share', client_share_index_path, class: "btn btn-light" %>
         <%= link_to 'Invite', client_invites_path, class: "btn btn-light" %>
         <%= link_to 'Lottery', client_lottery_index_path, class: "btn btn-light" %>
         <%= link_to 'Shop', client_shops_path, class: "btn b tn-light" %>

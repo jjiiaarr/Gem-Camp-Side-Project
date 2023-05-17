@@ -1,0 +1,13 @@
+<table class="table table-striped table-hover">
+  <tbody>
+<% @winners.each do |winner| %>
+  <tr class="card">
+    <td>
+  <%= image_tag winner.picture.url, height: "200", width: "200" if winner.picture.present? %>
+  <%= winner.user.username %> <br/>
+  <%= winner.comment %>
+    </td>
+  </tr>
+<% end %>
+  </tbody>
+</table>

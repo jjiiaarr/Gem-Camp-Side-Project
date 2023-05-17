@@ -13,6 +13,8 @@ class Winner < ApplicationRecord
   belongs_to :admin, class_name: 'User', optional: true
   belongs_to :user_address, optional: true
 
+  mount_uploader :picture, ImageUploader
+
   aasm column: :state do
     state :won, initial: true
     state :claimed, :submitted, :paid, :shipped,

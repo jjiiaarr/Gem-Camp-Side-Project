@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       resources :shops
       resources :claim
       resources :feedback
+      resources :share, only: :index
     end
   end
 
