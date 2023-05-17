@@ -10,6 +10,17 @@ class Client::ProfilesController < ApplicationController
     @invitation_history = User.where(parent: @user).order(created_at: :desc) if params[:invitation] == 'invitation'
   end
 
+  def cancel
+    @order = current_user.orders.find(params[:format])
+    if @order.may_cancel?
+      @order.cancel!
+      flash[:notice] = "Order canceled"
+    else
+      flash[:alert] = "Order failed to cancel"
+    end
+    redirect_to client_profile_path
+  end
+
   def edit; end
 
   private

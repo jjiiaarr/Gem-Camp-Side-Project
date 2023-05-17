@@ -29,7 +29,9 @@
             Serial Number : <%= order.serial_number %> <br/>
             Amount : <%= order.amount %> <br/>
             Coins : <%= order.coin %> <br/>
-            Created at: <%= order.created_at %>
+            Created at: <%= order.created_at %> <br/>
+            State: <%= order.state %>
+            <%= button_to 'Cancel Order', cancel_client_profile_path(order), data: {turbo: false}, class: "btn btn-danger mt-3" if order.may_cancel?  %>
           </td>
         </tr>
       <% end %>

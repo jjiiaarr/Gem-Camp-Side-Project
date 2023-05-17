@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     namespace :client, path: '' do
       root 'home#index'
       resource :home
-      resource :profile, only: [:show, :edit]
+      resource :profile, only: [:show, :edit] do
+        post :cancel
+      end
       resources :invites, only: :index
       resources :user_addresses
       resources :lottery
