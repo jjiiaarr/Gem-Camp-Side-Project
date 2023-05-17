@@ -1,5 +1,4 @@
 class Admin::WinnersController < ApplicationController
-  before_action :set_winner, except: :index
 
   layout 'admin'
 
@@ -13,8 +12,9 @@ class Admin::WinnersController < ApplicationController
   end
 
   def submit
-    if @winner.may_submit?
-      @winner.submit!
+    winner = Winner.find(params[:winner_id])
+    if winner.may_submit?
+      winner.submit!
       flash[:notice] = 'State submitted successfully'
     else
       flash[:alert] = 'State not submitted'
@@ -23,8 +23,9 @@ class Admin::WinnersController < ApplicationController
   end
 
   def pay
-    if @winner.may_pay?
-      @winner.pay!
+    winner = Winner.find(params[:winner_id])
+    if winner.may_pay?
+      winner.pay!
       flash[:notice] = 'State paid successfully'
     else
       flash[:alert] = 'State not paid'
@@ -33,19 +34,20 @@ class Admin::WinnersController < ApplicationController
   end
 
   def ship
-    if @winner.may_ship?
-      @winner.ship!
+    winner = Winner.find(params[:winner_id])
+    if winner.may_ship?
+      winner.ship!
       flash[:notice] = 'State shipped successfully'
     else
       flash[:alert] = 'State not shipped'
-      ship
-      redirect_to admin_winners_path
     end
+    redirect_to admin_winners_path
   end
 
   def deliver
-    if @winner.may_deliver?
-      @winner.deliver!
+    winner = Winner.find(params[:winner_id])
+    if winner.may_deliver?
+      winner.deliver!
       flash[:notice] = 'State delivered successfully'
     else
       flash[:alert] = 'State not delivered'
@@ -53,9 +55,21 @@ class Admin::WinnersController < ApplicationController
     redirect_to admin_winners_path
   end
 
+  def share
+    winner = Winner.find(params[:winner_id])
+    if winner.may_share?
+      winner.share!
+      flash[:notice] = 'State share successfully'
+    else
+      flash[:alert] = 'State not shared'
+    end
+    redirect_to admin_winners_path
+  end
+
   def publish
-    if @winner.may_publish?
-      @winner.publish!
+    winner = Winner.find(params[:winner_id])
+    if winner.may_publish?
+      winner.publish!
       flash[:notice] = 'State published successfully'
     else
       flash[:alert] = 'State not published'
@@ -64,18 +78,13 @@ class Admin::WinnersController < ApplicationController
   end
 
   def remove_publish
-    if @winner.may_remove_publish?
-      @winner.remove_publish!
+    winner = Winner.find(params[:winner_id])
+    if winner.may_remove_publish?
+      winner.remove_publish!
       flash[:notice] = 'State remove_published successfully'
     else
       flash[:alert] = 'State not remove_published'
     end
     redirect_to admin_winners_path
-  end
-
-  private
-
-  def set_winner
-    @winner = Winner.find(params[:id])
   end
 end
