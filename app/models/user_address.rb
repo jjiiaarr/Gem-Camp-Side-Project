@@ -21,6 +21,10 @@ class UserAddress < ApplicationRecord
 
   validate :number_of_addresses, on: :create
 
+  def address_concatenation
+    "#{street}, #{region&.name}, #{province&.name}, #{city&.name}, #{barangay&.name}"
+  end
+
   private
 
   def number_of_addresses
